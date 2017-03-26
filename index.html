@@ -1,0 +1,31 @@
+<div id="sketch">
+    <canvas id="paint"></canvas>
+</div>
+
+
+<script type="text/javascript">
+
+    var canvas = document.querySelector('#paint');
+    var ctx = canvas.getContext('2d');
+
+    var sketch = document.querySelector('#sketch');
+    var sketch_style = getComputedStyle(sketch);
+    
+    canvas.width = parseInt(sketch_style.getPropertyValue('width'));
+    canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+    
+    var mouse = {x: 0, y: 0};
+    
+    /* Mouse Capturing Work */
+
+    // object called mouse that will hold the x and y co-ordinates of the mouse;s position relative to the canvas. 
+    // e.pageX holds the position of the mouse relative to the document while this.offsetLeft holds the distance of the canvas's upper left corner from
+    // the closest "postiioned" parent. If none exists, then the closest positioned parent will default to body.  
+    canvas.addEventListener('mousemove', function(e){
+        mouse.x = e.pageX - this.offsetLeft;
+        mouse.y = e.pageY - this.offsetTop;
+        console.log("mouse X: ", mouse.x);
+        console.log("mouse Y: ", mouse.y);
+    }, false);
+
+</script>
