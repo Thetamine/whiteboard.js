@@ -1,8 +1,16 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<h1>Whiteboard.js</h1>
+<h4>Draw your ideas here!</h4>
+   
+   
 <div id="sketch">
     <canvas id="paint"></canvas>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
     var canvas = document.querySelector('#paint');
@@ -47,4 +55,22 @@
         ctx.lineTo(mouse.x, mouse.y);
         ctx.stroke();
     };
+    
+    // adding touch support for the drawing app. 
+    
+    $.fn.drawTouch = function() {
+    var start = function(e) {
+        var touchEvent = e.originalEvent.changedTouches[0];
+        ctx.beginPath();  
+        ctx.moveTo(touchEvent.pageX, touchEvent.pageY);
+    };
+    var move = function(e) {
+        var touchEvent = e.originalEvent.changedTouches[0];
+        e.preventDefault();
+        ctx.lineTo(touchEvent.pageX, touchEvent.pageY);
+        ctx.stroke();
+    };
+    $(this).touchstart(start);
+    $(this).touchmove(move);
+};
 </script>
